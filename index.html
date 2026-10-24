@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="dark h-full">
+<html lang="es" class="dark h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTEX ENGINE - Open Video Platform & Cloud Accounts</title>
+    <title>VORTEX ENGINE - Enterprise Network Portal</title>
 
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -23,20 +23,19 @@
                         }
                     },
                     boxShadow: {
-                        'neon-cyan': '0 0 20px -3px rgba(6, 182, 212, 0.4)',
-                        'neon-purple': '0 0 20px -3px rgba(168, 85, 247, 0.4)',
+                        'neon-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.5)',
+                        'neon-purple': '0 0 25px -5px rgba(168, 85, 247, 0.5)',
                     }
                 }
             }
         }
     </script>
 
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome Icons & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -48,12 +47,10 @@
         h1, h2, h3, .font-heading {
             font-family: 'Space Grotesk', sans-serif;
         }
-
-        /* Glassmorphism Styling */
         .glass-panel {
             background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         .glass-card {
@@ -61,1124 +58,122 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        /* Custom Scrollbars */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(3, 7, 18, 0.8);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(168, 85, 247, 0.4);
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(6, 182, 212, 0.7);
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .snap-y-mandatory {
-            scroll-snap-type: y mandatory;
-        }
-        .snap-start {
-            scroll-snap-align: start;
+        .glow-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(6, 182, 212, 0.15) 50%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="h-full flex flex-col bg-slate-950 text-slate-100 antialiased selection:bg-vortex-purple selection:text-white">
+<body class="h-full flex flex-col justify-between bg-slate-950 text-slate-100 antialiased relative">
 
-    <!-- TOP HEADER NAVBAR -->
-    <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            
-            <!-- Brand Logo -->
-            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('all')">
-                <div class="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-vortex-cyan via-vortex-purple to-vortex-pink p-0.5 shadow-neon-cyan">
+    <div class="glow-bg"></div>
+
+    <!-- HEADER / BARRA SUPERIOR -->
+    <header class="relative z-10 w-full glass-panel border-b border-slate-800/80 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-vortex-cyan via-vortex-purple to-vortex-pink p-0.5 shadow-neon-cyan">
                     <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
                         <i class="fa-solid fa-bolt text-vortex-cyan text-lg"></i>
                     </div>
                 </div>
                 <div>
-                    <h1 class="text-xl font-black tracking-wider bg-gradient-to-r from-white via-slate-200 to-vortex-cyan bg-clip-text text-transparent uppercase">
+                    <span class="text-lg font-black tracking-wider bg-gradient-to-r from-white via-slate-200 to-vortex-cyan bg-clip-text text-transparent uppercase font-heading">
                         VORTEX<span class="text-vortex-purple">ENGINE</span>
-                    </h1>
-                    <div class="flex items-center gap-2">
-                        <span class="text-[9px] font-mono uppercase tracking-widest px-1.5 py-0.2 rounded bg-vortex-cyan/20 text-vortex-cyan border border-vortex-cyan/30">Server Account Sync</span>
-                        <span class="flex h-2 w-2 relative">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                        </span>
-                    </div>
+                    </span>
+                    <p class="text-[9px] font-mono uppercase tracking-widest text-slate-400">Enterprise Network Infrastructure</p>
                 </div>
             </div>
 
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-xl mx-2 hidden md:block">
-                <div class="relative group">
-                    <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search videos, handles, creators..." 
-                        class="w-full bg-slate-900/90 border border-slate-800 rounded-full py-2 pl-10 pr-10 text-xs focus:outline-none focus:border-vortex-cyan focus:ring-1 focus:ring-vortex-cyan transition-all text-slate-200 placeholder-slate-500">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-slate-500 group-focus-within:text-vortex-cyan transition-colors text-xs"></i>
-                </div>
-            </div>
-
-            <!-- Header Actions -->
-            <div class="flex items-center gap-3">
-
-                <!-- Upload Video Button -->
-                <button onclick="openUploadModal()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-vortex-cyan to-vortex-purple hover:opacity-90 text-white text-xs font-bold flex items-center gap-2 shadow-neon-cyan transition-all transform hover:scale-105 active:scale-95">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span class="hidden sm:inline">Upload Video</span>
-                </button>
-
-                <!-- Account Auth Profile / Button -->
-                <div id="authContainer">
-                    <button onclick="openAuthModal()" id="btnAuthTrigger" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-xs font-semibold flex items-center gap-2 transition-all">
-                        <i class="fa-solid fa-user-circle text-vortex-cyan"></i>
-                        <span id="userAuthLabel">Sign In / Register</span>
-                    </button>
-                </div>
-
+            <div class="flex items-center gap-2">
+                <span class="flex h-2.5 w-2.5 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider hidden sm:inline">Nodo Operativo</span>
             </div>
         </div>
     </header>
 
-    <!-- MAIN APP LAYOUT -->
-    <div class="flex-1 flex overflow-hidden">
-
-        <!-- SIDEBAR NAVIGATION -->
-        <aside class="w-16 sm:w-64 glass-panel border-r border-slate-800/80 p-3 flex flex-col justify-between shrink-0">
-            <div class="space-y-2">
-                
-                <button onclick="switchTab('all')" id="navTabAll" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-white bg-vortex-purple/20 border border-vortex-purple/40 transition-all">
-                    <i class="fa-solid fa-play text-vortex-cyan text-base"></i>
-                    <span class="hidden sm:inline">All Videos</span>
-                </button>
-
-                <button onclick="switchTab('shorts')" id="navTabShorts" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent transition-all">
-                    <i class="fa-solid fa-bolt text-amber-400 text-base"></i>
-                    <span class="hidden sm:inline">Vertical Shorts</span>
-                </button>
-
-                <button onclick="switchTab('mychannel')" id="navTabChannel" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent transition-all">
-                    <i class="fa-solid fa-user text-vortex-purple text-base"></i>
-                    <span class="hidden sm:inline">My Channel</span>
-                </button>
-
-                <hr class="border-slate-800/80 my-3">
-
-                <!-- Server & AI Guard Status Card -->
-                <div class="hidden sm:block p-3 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2 text-[11px]">
-                    <div class="flex items-center gap-2 text-slate-300 font-bold">
-                        <i class="fa-solid fa-shield-halved text-emerald-400"></i>
-                        <span>Owner & AI Moderation</span>
-                    </div>
-                    <p class="text-slate-400 text-[10px] leading-relaxed">
-                        @vortexengine holds absolute owner privileges to moderate and delete any inappropriate video on the server.
-                    </p>
-                </div>
-            </div>
-        </aside>
-
-        <!-- CONTENT VIEWER -->
-        <main class="flex-1 relative overflow-y-auto p-4 sm:p-6">
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="relative z-10 flex-1 flex items-center justify-center p-6">
+        <div class="max-w-4xl w-full text-center space-y-8">
             
-            <!-- VIEW 1: HORIZONTAL VIDEO GRID FEED -->
-            <section id="viewGrid" class="max-w-7xl mx-auto space-y-6">
+            <!-- BADGE INSTITUCIONAL -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-vortex-cyan/30 text-vortex-cyan text-xs font-mono tracking-wide uppercase">
+                <i class="fa-solid fa-server"></i>
+                <span>Infraestructura Dedicada de Alta Disponibilidad</span>
+            </div>
+
+            <!-- TÍTULO PRINCIPAL -->
+            <div class="space-y-4">
+                <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight font-heading leading-tight">
+                    Plataforma Central de <br>
+                    <span class="bg-gradient-to-r from-vortex-cyan via-vortex-purple to-vortex-pink bg-clip-text text-transparent">
+                        Recursos Multimedia
+                    </span>
+                </h1>
+                <p class="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto font-normal">
+                    Acceso exclusivo a la red privada de transmisión y almacenamiento distribuido de VORTEX ENGINE. Un espacio diseñado para procesamiento de alta velocidad e integridad de datos.
+                </p>
+            </div>
+
+            <!-- TARJETAS DE ESPECIFICACIONES -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left max-w-3xl mx-auto pt-2">
                 
-                <!-- Category Filters -->
-                <div class="flex items-center justify-between gap-4 border-b border-slate-800 pb-3 overflow-x-auto no-scrollbar">
-                    <div class="flex items-center gap-2">
-                        <button onclick="filterCategory('All')" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-950 shadow-md">All</button>
-                        <button onclick="filterCategory('Gaming')" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:border-slate-700">Gaming</button>
-                        <button onclick="filterCategory('Tech')" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:border-slate-700">Technology</button>
-                        <button onclick="filterCategory('Music')" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:border-slate-700">Music</button>
+                <div class="glass-card p-5 rounded-2xl border border-slate-800 space-y-2 hover:border-vortex-cyan/40 transition-colors">
+                    <div class="text-vortex-cyan text-xl">
+                        <i class="fa-solid fa-microchip"></i>
                     </div>
-
-                    <div class="text-xs text-slate-400 font-mono hidden sm:block">
-                        Platform Status: <span class="text-emerald-400 font-bold">Server Database Live</span>
-                    </div>
+                    <h3 class="text-xs font-bold font-heading uppercase text-slate-200">Almacenamiento Físico</h3>
+                    <p class="text-lg font-bold font-mono text-white">8 GB Dedicados</p>
+                    <p class="text-[10px] text-slate-500">Capacidad optimizada para streaming directo.</p>
                 </div>
 
-                <!-- Video Feed Grid Container -->
-                <div id="videoGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Dynamic Video Cards inserted here -->
-                </div>
-
-            </section>
-
-            <!-- VIEW 2: SHORTS VERTICAL FEED -->
-            <section id="viewShorts" class="hidden h-full w-full max-w-md mx-auto relative">
-                <div id="shortsContainer" class="w-full h-full overflow-y-scroll snap-y-mandatory no-scrollbar rounded-3xl border border-slate-800 bg-black">
-                    <!-- Dynamic Short Vertical Cards inserted here -->
-                </div>
-            </section>
-
-        </main>
-    </div>
-
-    <!-- MODAL 1: AUTHENTICATION / HANDLE REGISTRATION & LOGIN -->
-    <div id="modalAuth" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-md rounded-3xl overflow-hidden shadow-2xl flex flex-col">
-            <div class="p-5 border-b border-slate-800 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-vortex-cyan to-vortex-purple flex items-center justify-center text-white">
-                        <i class="fa-solid fa-user-lock"></i>
+                <div class="glass-card p-5 rounded-2xl border border-slate-800 space-y-2 hover:border-vortex-purple/40 transition-colors">
+                    <div class="text-vortex-purple text-xl">
+                        <i class="fa-solid fa-network-wired"></i>
                     </div>
-                    <div>
-                        <h3 class="text-sm font-bold text-slate-100 font-heading uppercase tracking-wider">Account Server Portal</h3>
-                        <p class="text-[11px] text-slate-400">Unique Handle & Password Protection</p>
-                    </div>
+                    <h3 class="text-xs font-bold font-heading uppercase text-slate-200">Conectividad Global</h3>
+                    <p class="text-lg font-bold font-mono text-white">Enlace Directo</p>
+                    <p class="text-[10px] text-slate-500">Rutas de baja latencia con respuesta inmediata.</p>
                 </div>
-                <button onclick="closeAuthModal()" class="w-8 h-8 rounded-full bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center border border-slate-800">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+
+                <div class="glass-card p-5 rounded-2xl border border-slate-800 space-y-2 hover:border-vortex-pink/40 transition-colors">
+                    <div class="text-vortex-pink text-xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xs font-bold font-heading uppercase text-slate-200">Red Privada</h3>
+                    <p class="text-lg font-bold font-mono text-white">Acceso Restringido</p>
+                    <p class="text-[10px] text-slate-500">Aislamiento total del entorno de ejecución.</p>
+                </div>
+
             </div>
 
-            <div class="p-6 space-y-4">
-                <!-- Mode Switch Tabs -->
-                <div class="grid grid-cols-2 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
-                    <button id="tabLoginBtn" onclick="switchAuthMode('login')" class="py-2 rounded-lg bg-vortex-purple text-white shadow">Sign In</button>
-                    <button id="tabRegisterBtn" onclick="switchAuthMode('register')" class="py-2 rounded-lg text-slate-400 hover:text-white">Create Account</button>
-                </div>
-
-                <!-- Form -->
-                <form id="formAuth" onsubmit="handleAuthSubmit(event)" class="space-y-3">
-                    <div class="space-y-1">
-                        <label class="text-[11px] font-bold text-slate-300 uppercase">Handle (@username)</label>
-                        <div class="relative">
-                            <span class="absolute left-3.5 top-2.5 text-slate-500 text-xs">@</span>
-                            <input type="text" id="authHandleInput" required placeholder="handle (letters, numbers, _)" 
-                                class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-8 pr-3 py-2 text-xs focus:outline-none focus:border-vortex-cyan text-slate-200" oninput="checkOwnerHandleHint(this.value)">
-                        </div>
-                        <p class="text-[10px] text-slate-500">Max 20 chars. Only letters, numbers, and underscores (`_`).</p>
-                    </div>
-
-                    <div class="space-y-1">
-                        <label class="text-[11px] font-bold text-slate-300 uppercase">Password</label>
-                        <input type="password" id="authPasswordInput" required placeholder="Enter your password" 
-                            class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-vortex-cyan text-slate-200">
-                        <p id="authPasswordHint" class="hidden text-[10px] text-amber-400">Platform owner handle detected. Enter the owner password for automatic verification.</p>
-                    </div>
-
-                    <button type="submit" id="btnAuthSubmit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-vortex-cyan to-vortex-purple text-white font-bold text-xs shadow-neon-cyan transition-all">
-                        Sign In to Account
-                    </button>
-                </form>
-
-                <div id="currentUserBadge" class="hidden pt-3 border-t border-slate-800 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <div id="activeUserAvatar" class="w-8 h-8 rounded-full bg-vortex-purple/30 text-vortex-purple flex items-center justify-center font-bold text-xs"></div>
-                        <div>
-                            <div class="flex items-center gap-1.5">
-                                <span id="activeUserHandleText" class="text-xs font-bold text-white"></span>
-                                <span id="activeUserVerifiedBadge" class="hidden text-sky-400 text-xs" title="Verified Account">
-                                    <i class="fa-solid fa-circle-check"></i>
-                                </span>
-                            </div>
-                            <span class="text-[10px] text-emerald-400 font-mono">Active Cloud Session</span>
-                        </div>
-                    </div>
-                    <button onclick="handleLogout()" class="px-3 py-1.5 bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-xl text-xs font-semibold hover:bg-rose-500 hover:text-white transition-all">Sign Out</button>
-                </div>
+            <!-- BOTÓN PRINCIPAL DE ENTRADA -->
+            <div class="pt-4">
+                <a href="TU_LINK_DE_CLOUDFLARE_AQUÍ" target="_blank" class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-vortex-cyan via-vortex-purple to-vortex-pink hover:opacity-95 text-white font-bold font-heading text-sm uppercase tracking-wider shadow-neon-cyan transition-all transform hover:scale-105 active:scale-95 cursor-pointer">
+                    <span>Acceder a VORTEX ENGINE</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
             </div>
+
         </div>
-    </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 w-full glass-panel border-t border-slate-800/80 px-6 py-4 text-center">
+        <p class="text-[11px] text-slate-500 font-mono uppercase tracking-widest">
+            © VORTEX ENGINE — Sistemas de Infraestructura Multimedia
+        </p>
+    </footer>
 
-    <!-- MODAL 2: UPLOAD VIDEO -->
-    <div id="modalUpload" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-xl rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-            
-            <div class="p-5 border-b border-slate-800 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-vortex-cyan to-vortex-purple flex items-center justify-center text-white">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-bold text-slate-100 font-heading uppercase tracking-wider">Publish Video to Server Storage</h3>
-                        <p class="text-[11px] text-slate-400">Linked to your active account handle</p>
-                    </div>
-                </div>
-                <button onclick="closeUploadModal()" class="w-8 h-8 rounded-full bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center border border-slate-800">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <form id="formUpload" onsubmit="handleUploadSubmit(event)" class="p-6 overflow-y-auto space-y-4">
-                
-                <!-- Video File Drop Area -->
-                <div id="dropzone" class="border-2 border-dashed border-slate-800 hover:border-vortex-cyan rounded-2xl p-5 text-center bg-slate-900/40 cursor-pointer transition-all" onclick="document.getElementById('fileInput').click()">
-                    <input type="file" id="fileInput" accept="video/mp4,video/webm,video/ogg,video/mov" class="hidden" onchange="handleFileSelect(event)">
-                    <div id="dropzoneText" class="space-y-1">
-                        <i class="fa-solid fa-file-video text-3xl text-vortex-cyan"></i>
-                        <p class="text-xs font-semibold text-slate-300">Click or drag video file (.mp4, .webm)</p>
-                        <p class="text-[10px] text-slate-500">Video binary will be saved to server account DB</p>
-                    </div>
-                    <div id="dropzoneSuccess" class="hidden space-y-1">
-                        <i class="fa-solid fa-circle-check text-2xl text-emerald-400"></i>
-                        <p id="fileNameText" class="text-xs font-bold text-slate-200 truncate max-w-xs mx-auto"></p>
-                    </div>
-                </div>
-
-                <!-- Title & Format Selection -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div class="sm:col-span-2 space-y-1">
-                        <label class="text-[11px] font-bold text-slate-300 uppercase">Video Title</label>
-                        <input type="text" id="inputTitle" required placeholder="Enter video title..." 
-                            class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-vortex-cyan text-slate-200">
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[11px] font-bold text-slate-300 uppercase">Format</label>
-                        <select id="inputFormat" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-vortex-cyan text-slate-200">
-                            <option value="horizontal">Horizontal (Video)</option>
-                            <option value="vertical">Vertical (Short)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Category -->
-                <div class="space-y-1">
-                    <label class="text-[11px] font-bold text-slate-300 uppercase">Category</label>
-                    <select id="inputCategory" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-vortex-cyan text-slate-200">
-                        <option value="Gaming">Gaming</option>
-                        <option value="Tech">Technology</option>
-                        <option value="Music">Music</option>
-                        <option value="General">General</option>
-                    </select>
-                </div>
-
-                <!-- Upload Progress Bar -->
-                <div id="uploadProgressContainer" class="hidden space-y-1">
-                    <div class="flex justify-between text-[10px] text-slate-400 font-mono">
-                        <span>Saving video to account storage...</span>
-                        <span id="uploadProgressText">0%</span>
-                    </div>
-                    <div class="w-full h-2 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
-                        <div id="uploadProgressBar" class="h-full bg-gradient-to-r from-vortex-cyan to-vortex-purple w-0 transition-all duration-200"></div>
-                    </div>
-                </div>
-
-                <!-- Upload Submit Button -->
-                <button type="submit" id="btnSubmitUpload" disabled class="w-full py-2.5 rounded-xl bg-gradient-to-r from-vortex-cyan to-vortex-purple text-white font-bold text-xs opacity-50 cursor-not-allowed transition-all shadow-neon-cyan">
-                    Save and Publish Video
-                </button>
-
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL 3: FULL VIDEO PLAYER -->
-    <div id="modalPlayer" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
-        <div class="glass-panel w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[95vh]">
-            
-            <!-- Video Container -->
-            <div class="relative bg-black w-full flex justify-center items-center overflow-hidden min-h-[220px] sm:min-h-[380px]">
-                <video id="playerVideo" controls autoplay class="w-full max-h-[60vh] object-contain"></video>
-                <button onclick="closePlayerModal()" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-slate-900/80 text-white flex items-center justify-center border border-slate-700">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Video Details & Actions -->
-            <div class="p-4 sm:p-6 overflow-y-auto space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
-                    <div>
-                        <h2 id="playerTitle" class="text-base font-bold text-white font-heading"></h2>
-                        <div class="flex items-center gap-2 text-xs text-slate-400 mt-1">
-                            <div class="flex items-center gap-1.5">
-                                <span id="playerAuthor" class="font-bold text-slate-200"></span>
-                                <span id="playerAuthorVerified" class="hidden text-sky-400 text-xs"><i class="fa-solid fa-circle-check"></i></span>
-                            </div>
-                            <span>•</span>
-                            <span id="playerViews">0 views</span>
-                        </div>
-                    </div>
-
-                    <!-- Interactive Action Buttons -->
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <button id="btnPlayerLike" onclick="actionLike()" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold flex items-center gap-1.5 text-slate-300 hover:text-vortex-pink transition-all">
-                            <i class="fa-solid fa-heart"></i>
-                            <span id="playerLikes">0</span>
-                        </button>
-                        <button id="btnPlayerFollow" onclick="actionFollow()" class="px-3 py-1.5 rounded-xl bg-vortex-purple/20 border border-vortex-purple/40 text-vortex-purple text-xs font-bold flex items-center gap-1.5 hover:bg-vortex-purple hover:text-white transition-all">
-                            <i class="fa-solid fa-user-plus"></i>
-                            <span id="playerFollowText">Follow Creator</span>
-                        </button>
-                        <!-- Delete / Moderate Video Button (Shown if current user is owner OR video creator) -->
-                        <button id="btnDeleteVideo" onclick="actionDeleteVideo()" class="hidden px-3 py-1.5 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-400 text-xs font-bold items-center gap-1.5 hover:bg-rose-500 hover:text-white transition-all">
-                            <i class="fa-solid fa-trash-can"></i>
-                            <span id="deleteBtnText">Delete Video</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Real-time Comments Thread with AI Anti-Spam Guard -->
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Comments</h4>
-                        <span class="text-[10px] text-emerald-400 font-mono flex items-center gap-1"><i class="fa-solid fa-robot"></i> AI Anti-Spam Enabled</span>
-                    </div>
-                    <div class="flex gap-2">
-                        <input type="text" id="inputComment" placeholder="Add a comment..." 
-                            class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-vortex-cyan text-slate-200"
-                            onkeypress="if(event.key==='Enter') submitComment()">
-                        <button onclick="submitComment()" class="px-4 py-2 bg-vortex-cyan hover:bg-vortex-cyan/80 text-slate-950 font-bold text-xs rounded-xl">Post</button>
-                    </div>
-                    <div id="playerCommentsContainer" class="space-y-2 max-h-36 overflow-y-auto pt-1">
-                        <!-- Dynamic comments -->
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- NOTIFICATION TOAST -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden glass-panel border border-vortex-cyan/50 text-slate-100 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300">
-        <div class="w-7 h-7 rounded-xl bg-vortex-cyan/20 text-vortex-cyan flex items-center justify-center text-xs">
-            <i class="fa-solid fa-bell"></i>
-        </div>
-        <p id="toastText" class="text-xs font-semibold"></p>
-    </div>
-
-    <!-- SCRIPT ENGINE: SERVER PERSISTENCE & AI SPAM GUARD -->
-    <script>
-        /* ==========================================================================
-           INDEXEDDB SERVER STORAGE ENGINE (Accounts & Videos)
-           ========================================================================== */
-
-        const DB_NAME = 'VortexEngineServerDB';
-        const DB_VERSION = 2;
-        const STORE_ACCOUNTS = 'server_accounts';
-        const STORE_VIDEOS = 'server_videos';
-        const STORE_BLOBS = 'server_video_blobs';
-
-        let db = null;
-
-        function initDatabase() {
-            return new Promise((resolve, reject) => {
-                const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-                request.onupgradeneeded = (e) => {
-                    const database = e.target.result;
-                    if (!database.objectStoreNames.contains(STORE_ACCOUNTS)) {
-                        database.createObjectStore(STORE_ACCOUNTS, { keyPath: 'handle' });
-                    }
-                    if (!database.objectStoreNames.contains(STORE_VIDEOS)) {
-                        database.createObjectStore(STORE_VIDEOS, { keyPath: 'id' });
-                    }
-                    if (!database.objectStoreNames.contains(STORE_BLOBS)) {
-                        database.createObjectStore(STORE_BLOBS, { keyPath: 'id' });
-                    }
-                };
-
-                request.onsuccess = (e) => {
-                    db = e.target.result;
-                    resolve(db);
-                };
-
-                request.onerror = (e) => {
-                    console.error("Database connection error:", e.target.error);
-                    reject(e.target.error);
-                };
-            });
-        }
-
-        // Account DB helpers
-        function getAccountFromDB(handle) {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction([STORE_ACCOUNTS], 'readonly');
-                const store = tx.objectStore(STORE_ACCOUNTS);
-                const req = store.get(handle.toLowerCase());
-                req.onsuccess = () => resolve(req.result);
-                req.onerror = () => reject(req.error);
-            });
-        }
-
-        function saveAccountToDB(acc) {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction([STORE_ACCOUNTS], 'readwrite');
-                const store = tx.objectStore(STORE_ACCOUNTS);
-                store.put(acc);
-                tx.oncomplete = () => resolve();
-                tx.onerror = () => reject(tx.error);
-            });
-        }
-
-        // Video DB helpers
-        function saveVideoToDB(meta, blob) {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction([STORE_VIDEOS, STORE_BLOBS], 'readwrite');
-                tx.objectStore(STORE_VIDEOS).put(meta);
-                tx.objectStore(STORE_BLOBS).put({ id: meta.id, blob: blob });
-                tx.oncomplete = () => resolve();
-                tx.onerror = () => reject(tx.error);
-            });
-        }
-
-        function deleteVideoFromDB(id) {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction([STORE_VIDEOS, STORE_BLOBS], 'readwrite');
-                tx.objectStore(STORE_VIDEOS).delete(id);
-                tx.objectStore(STORE_BLOBS).delete(id);
-                tx.oncomplete = () => resolve();
-                tx.onerror = () => reject(tx.error);
-            });
-        }
-
-        function getAllVideosFromDB() {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction([STORE_VIDEOS, STORE_BLOBS], 'readonly');
-                const metaStore = tx.objectStore(STORE_VIDEOS);
-                const blobStore = tx.objectStore(STORE_BLOBS);
-                const list = [];
-                const req = metaStore.openCursor();
-
-                req.onsuccess = (e) => {
-                    const cursor = e.target.result;
-                    if (cursor) {
-                        const meta = cursor.value;
-                        blobStore.get(meta.id).onsuccess = (evt) => {
-                            const bRec = evt.target.result;
-                            if (bRec && bRec.blob) {
-                                meta.blobUrl = URL.createObjectURL(bRec.blob);
-                            }
-                            list.push(meta);
-                        };
-                        cursor.continue();
-                    } else {
-                        tx.oncomplete = () => resolve(list);
-                    }
-                };
-                req.onerror = () => reject(req.error);
-            });
-        }
-
-        function updateVideoMetaInDB(meta) {
-            if (!db) return;
-            const tx = db.transaction([STORE_VIDEOS], 'readwrite');
-            tx.objectStore(STORE_VIDEOS).put(meta);
-        }
-
-        /* ==========================================================================
-           APPLICATION STATE & INITIALIZATION
-           ========================================================================== */
-
-        window.state = {
-            videos: [],
-            currentTab: 'all',
-            activeCategory: 'All',
-            searchQuery: '',
-            currentUser: null,
-            activeVideoId: null,
-            authMode: 'login'
-        };
-
-        const OWNER_HANDLE = 'vortexengine';
-        const OWNER_PASSWORD = '2026vortexenginefoundation2026bythisaccount2026VerifiedAccount2026';
-
-        window.onload = async function() {
-            try {
-                await initDatabase();
-                await loadServerData();
-                checkSessionCookie();
-            } catch (err) {
-                console.error("Initialization error:", err);
-            }
-        };
-
-        async function loadServerData() {
-            try {
-                window.state.videos = await getAllVideosFromDB() || [];
-                renderFeed();
-            } catch (err) {
-                console.error("Failed loading videos:", err);
-            }
-        }
-
-        function checkSessionCookie() {
-            const savedHandle = sessionStorage.getItem('vortex_active_handle');
-            if (savedHandle) {
-                getAccountFromDB(savedHandle).then(acc => {
-                    if (acc) {
-                        window.state.currentUser = acc;
-                        updateAuthUI();
-                    }
-                });
-            }
-        }
-
-        /* ==========================================================================
-           NAVIGATION & RENDERING
-           ========================================================================== */
-
-        window.switchTab = function(tab) {
-            window.state.currentTab = tab;
-            const viewGrid = document.getElementById('viewGrid');
-            const viewShorts = document.getElementById('viewShorts');
-
-            document.getElementById('navTabAll').className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent transition-all";
-            document.getElementById('navTabShorts').className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent transition-all";
-            document.getElementById('navTabChannel').className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent transition-all";
-
-            if (tab === 'all') {
-                viewGrid.classList.remove('hidden');
-                viewShorts.classList.add('hidden');
-                document.getElementById('navTabAll').className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-white bg-vortex-purple/20 border border-vortex-purple/40 transition-all";
-            } else if (tab === 'shorts') {
-                viewGrid.classList.add('hidden');
-                viewShorts.classList.remove('hidden');
-                document.getElementById('navTabShorts').className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-white bg-vortex-purple/20 border border-vortex-purple/40 transition-all";
-            } else if (tab === 'mychannel') {
-                viewGrid.classList.remove('hidden');
-                viewShorts.classList.add('hidden');
-                document.getElementById('navTabChannel').className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-white bg-vortex-purple/20 border border-vortex-purple/40 transition-all";
-            }
-            renderFeed();
-        };
-
-        window.filterCategory = function(cat) {
-            window.state.activeCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(b => b.className = "cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:border-slate-700");
-            event.target.className = "cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-950 shadow-md";
-            renderFeed();
-        };
-
-        window.handleSearch = function(val) {
-            window.state.searchQuery = val;
-            renderFeed();
-        };
-
-        function renderFeed() {
-            if (window.state.currentTab === 'shorts') {
-                renderShortsFeed();
-            } else {
-                renderGridFeed();
-            }
-        }
-
-        function renderGridFeed() {
-            const container = document.getElementById('videoGridContainer');
-            container.innerHTML = '';
-
-            let list = window.state.videos.filter(v => v.format === 'horizontal');
-
-            if (window.state.currentTab === 'mychannel') {
-                if (!window.state.currentUser) {
-                    container.innerHTML = `
-                        <div class="col-span-full py-20 text-center space-y-3 glass-panel rounded-3xl p-8 border border-slate-800">
-                            <i class="fa-solid fa-user-lock text-3xl text-vortex-purple"></i>
-                            <h3 class="text-base font-bold text-white font-heading">Authentication Required</h3>
-                            <p class="text-xs text-slate-400">Please sign in to view your channel and uploaded videos.</p>
-                            <button onclick="openAuthModal()" class="px-4 py-2 rounded-xl bg-vortex-cyan text-slate-950 font-bold text-xs">Sign In / Register</button>
-                        </div>
-                    `;
-                    return;
-                }
-                list = list.filter(v => v.authorHandle === window.state.currentUser.handle);
-            }
-
-            if (window.state.activeCategory !== 'All') {
-                list = list.filter(v => v.category === window.state.activeCategory);
-            }
-
-            if (window.state.searchQuery) {
-                list = list.filter(v => v.title.toLowerCase().includes(window.state.searchQuery.toLowerCase()) || v.authorHandle.toLowerCase().includes(window.state.searchQuery.toLowerCase()));
-            }
-
-            if (list.length === 0) {
-                container.innerHTML = `
-                    <div class="col-span-full py-20 text-center space-y-3 glass-panel rounded-3xl p-8 border border-slate-800">
-                        <div class="w-16 h-16 rounded-2xl bg-vortex-purple/10 border border-vortex-purple/30 text-vortex-purple flex items-center justify-center mx-auto text-2xl">
-                            <i class="fa-solid fa-video-slash"></i>
-                        </div>
-                        <h3 class="text-base font-bold text-white font-heading">No videos found</h3>
-                        <p class="text-xs text-slate-400 max-w-sm mx-auto">Upload a video to server database!</p>
-                    </div>
-                `;
-                return;
-            }
-
-            list.forEach(video => {
-                const card = document.createElement('div');
-                card.className = "glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-vortex-cyan/50 transition-all duration-300 hover:-translate-y-1 flex flex-col cursor-pointer group";
-                card.onclick = () => openPlayerModal(video.id);
-
-                card.innerHTML = `
-                    <div class="relative aspect-video bg-black overflow-hidden">
-                        <video src="${video.blobUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></video>
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60"></div>
-                        <span class="absolute bottom-2 right-2 bg-slate-950/90 text-slate-300 text-[10px] font-mono px-2 py-0.5 rounded border border-slate-800">Server Sync</span>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
-                        <div>
-                            <h3 class="text-xs font-bold text-white line-clamp-2 group-hover:text-vortex-cyan transition-colors">${video.title}</h3>
-                            <div class="flex items-center gap-1.5 mt-1">
-                                <span class="text-[11px] text-slate-400">@${video.authorHandle}</span>
-                                ${video.verified ? '<span class="text-sky-400 text-[10px]"><i class="fa-solid fa-circle-check"></i></span>' : ''}
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between text-[10px] text-slate-500 border-t border-slate-800/80 pt-2 font-mono">
-                            <span>${video.views} views</span>
-                            <span class="text-vortex-pink flex items-center gap-1"><i class="fa-solid fa-heart"></i> ${video.likes}</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function renderShortsFeed() {
-            const container = document.getElementById('shortsContainer');
-            container.innerHTML = '';
-
-            const list = window.state.videos.filter(v => v.format === 'vertical');
-
-            if (list.length === 0) {
-                container.innerHTML = `
-                    <div class="h-full flex flex-col items-center justify-center text-center p-6 space-y-3">
-                        <i class="fa-solid fa-bolt text-4xl text-amber-400 animate-pulse"></i>
-                        <h3 class="text-sm font-bold text-white">No Vertical Shorts</h3>
-                        <p class="text-xs text-slate-400">Publish the first vertical short to server storage.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            list.forEach(short => {
-                const card = document.createElement('div');
-                card.className = "w-full h-full snap-start relative bg-black flex items-center justify-center overflow-hidden";
-                card.innerHTML = `
-                    <video loop muted playsinline src="${short.blobUrl}" onclick="this.paused ? this.play() : this.pause()" class="w-full h-full object-cover"></video>
-                    
-                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent p-5 space-y-2 pointer-events-none">
-                        <div class="flex items-center gap-2 pointer-events-auto">
-                            <span class="text-xs font-bold text-white">@${short.authorHandle}</span>
-                            ${short.verified ? '<span class="text-sky-400 text-xs"><i class="fa-solid fa-circle-check"></i></span>' : ''}
-                            <button onclick="actionFollow()" class="px-2 py-0.5 rounded-full bg-vortex-cyan text-slate-950 font-bold text-[10px]">Follow</button>
-                        </div>
-                        <p class="text-xs text-slate-200 line-clamp-2">${short.title}</p>
-                    </div>
-
-                    <div class="absolute right-3 bottom-16 flex flex-col items-center gap-4 z-20">
-                        <button onclick="actionLikeShort('${short.id}', this)" class="flex flex-col items-center gap-1 text-white">
-                            <div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center">
-                                <i class="fa-solid fa-heart text-vortex-pink text-lg"></i>
-                            </div>
-                            <span class="text-[10px] font-mono font-bold">${short.likes}</span>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        /* ==========================================================================
-           ACCOUNT AUTHENTICATION & HANDLE VALIDATION
-           ========================================================================== */
-
-        window.openAuthModal = function() {
-            document.getElementById('modalAuth').classList.remove('hidden');
-        };
-
-        window.closeAuthModal = function() {
-            document.getElementById('modalAuth').classList.add('hidden');
-        };
-
-        window.switchAuthMode = function(mode) {
-            window.state.authMode = mode;
-            const btnLogin = document.getElementById('tabLoginBtn');
-            const btnReg = document.getElementById('tabRegisterBtn');
-            const submitBtn = document.getElementById('btnAuthSubmit');
-
-            if (mode === 'login') {
-                btnLogin.className = "py-2 rounded-lg bg-vortex-purple text-white shadow";
-                btnReg.className = "py-2 rounded-lg text-slate-400 hover:text-white";
-                submitBtn.innerText = "Sign In to Account";
-            } else {
-                btnReg.className = "py-2 rounded-lg bg-vortex-purple text-white shadow";
-                btnLogin.className = "py-2 rounded-lg text-slate-400 hover:text-white";
-                submitBtn.innerText = "Create Account on Server";
-            }
-            checkOwnerHandleHint(document.getElementById('authHandleInput').value);
-        };
-
-        window.checkOwnerHandleHint = function(val) {
-            const hint = document.getElementById('authPasswordHint');
-            if (val.trim().toLowerCase() === OWNER_HANDLE && window.state.authMode === 'register') {
-                hint.classList.remove('hidden');
-            } else {
-                hint.classList.add('hidden');
-            }
-        };
-
-        window.handleAuthSubmit = async function(e) {
-            e.preventDefault();
-            const handleRaw = document.getElementById('authHandleInput').value.trim().toLowerCase();
-            const password = document.getElementById('authPasswordInput').value;
-
-            const handleRegex = /^[a-z0-9_]{1,20}$/;
-            if (!handleRegex.test(handleRaw)) {
-                showToast("Invalid handle! Max 20 chars. Use only letters, numbers, and underscores (`_`).");
-                return;
-            }
-
-            const existingAcc = await getAccountFromDB(handleRaw);
-
-            if (window.state.authMode === 'register') {
-                if (existingAcc) {
-                    showToast("Error: This handle is already in use on the server!");
-                    return;
-                }
-
-                let isVerified = false;
-                if (handleRaw === OWNER_HANDLE) {
-                    if (password !== OWNER_PASSWORD) {
-                        showToast("Incorrect platform owner password!");
-                        return;
-                    }
-                    isVerified = true;
-                }
-
-                const newAcc = {
-                    handle: handleRaw,
-                    password: password,
-                    verified: isVerified,
-                    createdAt: new Date().toISOString()
-                };
-
-                await saveAccountToDB(newAcc);
-                window.state.currentUser = newAcc;
-                sessionStorage.setItem('vortex_active_handle', handleRaw);
-                closeAuthModal();
-                updateAuthUI();
-                showToast(isVerified ? "Platform Owner account verified!" : "Account created successfully!");
-            } else {
-                if (!existingAcc) {
-                    showToast("Account handle does not exist. Please register first.");
-                    return;
-                }
-
-                if (handleRaw === OWNER_HANDLE && password === OWNER_PASSWORD && !existingAcc.verified) {
-                    existingAcc.verified = true;
-                    await saveAccountToDB(existingAcc);
-                }
-
-                if (existingAcc.password !== password) {
-                    showToast("Incorrect password for this handle!");
-                    return;
-                }
-
-                window.state.currentUser = existingAcc;
-                sessionStorage.setItem('vortex_active_handle', handleRaw);
-                closeAuthModal();
-                updateAuthUI();
-                showToast(`Welcome back, @${handleRaw}!`);
-            }
-        };
-
-        window.handleLogout = function() {
-            window.state.currentUser = null;
-            sessionStorage.removeItem('vortex_active_handle');
-            updateAuthUI();
-            showToast("Signed out successfully");
-        };
-
-        function updateAuthUI() {
-            const badge = document.getElementById('currentUserBadge');
-            const form = document.getElementById('formAuth');
-            const label = document.getElementById('userAuthLabel');
-
-            if (window.state.currentUser) {
-                form.classList.add('hidden');
-                badge.classList.remove('hidden');
-                document.getElementById('activeUserAvatar').innerText = window.state.currentUser.handle.charAt(0).toUpperCase();
-                document.getElementById('activeUserHandleText').innerText = '@' + window.state.currentUser.handle;
-                if (window.state.currentUser.verified) {
-                    document.getElementById('activeUserVerifiedBadge').classList.remove('hidden');
-                } else {
-                    document.getElementById('activeUserVerifiedBadge').classList.add('hidden');
-                }
-                label.innerText = '@' + window.state.currentUser.handle;
-            } else {
-                form.classList.remove('hidden');
-                badge.classList.add('hidden');
-                label.innerText = 'Sign In / Register';
-            }
-            renderFeed();
-        }
-
-        /* ==========================================================================
-           UPLOAD ENGINE
-           ========================================================================== */
-
-        let selectedUploadedFile = null;
-
-        window.openUploadModal = function() {
-            if (!window.state.currentUser) {
-                showToast("Please sign in or create an account to upload videos.");
-                openAuthModal();
-                return;
-            }
-            document.getElementById('modalUpload').classList.remove('hidden');
-        };
-
-        window.closeUploadModal = function() {
-            document.getElementById('modalUpload').classList.add('hidden');
-            resetUploadForm();
-        };
-
-        function resetUploadForm() {
-            document.getElementById('formUpload').reset();
-            document.getElementById('dropzoneText').classList.remove('hidden');
-            document.getElementById('dropzoneSuccess').classList.add('hidden');
-            document.getElementById('uploadProgressContainer').classList.add('hidden');
-            selectedUploadedFile = null;
-            document.getElementById('btnSubmitUpload').disabled = true;
-            document.getElementById('btnSubmitUpload').classList.add('opacity-50', 'cursor-not-allowed');
-        }
-
-        window.handleFileSelect = function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            selectedUploadedFile = file;
-            document.getElementById('fileNameText').innerText = `${file.name} (${(file.size / (1024 * 1024)).toFixed(1)} MB)`;
-            document.getElementById('dropzoneText').classList.add('hidden');
-            document.getElementById('dropzoneSuccess').classList.remove('hidden');
-            const btn = document.getElementById('btnSubmitUpload');
-            btn.disabled = false;
-            btn.classList.remove('opacity-50', 'cursor-not-allowed');
-        };
-
-        window.handleUploadSubmit = async function(e) {
-            e.preventDefault();
-            if (!window.state.currentUser) {
-                showToast("Session expired. Please sign in again.");
-                return;
-            }
-
-            const title = document.getElementById('inputTitle').value;
-            const format = document.getElementById('inputFormat').value;
-            const category = document.getElementById('inputCategory').value;
-
-            const progressContainer = document.getElementById('uploadProgressContainer');
-            const progressBar = document.getElementById('uploadProgressBar');
-            const progressText = document.getElementById('uploadProgressText');
-            progressContainer.classList.remove('hidden');
-
-            for (let p = 0; p <= 100; p += 25) {
-                progressBar.style.width = p + '%';
-                progressText.innerText = p + '%';
-                await new Promise(r => setTimeout(r, 40));
-            }
-
-            const videoId = 'vid_' + Date.now();
-            const videoMeta = {
-                id: videoId,
-                title: title,
-                format: format,
-                category: category,
-                authorHandle: window.state.currentUser.handle,
-                verified: window.state.currentUser.verified,
-                views: 1,
-                likes: 0,
-                comments: [],
-                createdAt: new Date().toISOString()
-            };
-
-            try {
-                await saveVideoToDB(videoMeta, selectedUploadedFile);
-                videoMeta.blobUrl = URL.createObjectURL(selectedUploadedFile);
-                window.state.videos.unshift(videoMeta);
-
-                closeUploadModal();
-                renderFeed();
-                showToast("Video published to server storage successfully!");
-            } catch (err) {
-                console.error("Upload error:", err);
-                showToast("Failed to save video.");
-            }
-        };
-
-        /* ==========================================================================
-           FULL VIDEO PLAYER, AI SPAM FILTER & OWNER MODERATION
-           ========================================================================== */
-
-        window.openPlayerModal = function(id) {
-            const video = window.state.videos.find(v => v.id === id);
-            if (!video) return;
-
-            window.state.activeVideoId = id;
-            video.views++;
-            updateVideoMetaInDB(video);
-
-            const player = document.getElementById('playerVideo');
-            player.src = video.blobUrl;
-
-            document.getElementById('playerTitle').innerText = video.title;
-            document.getElementById('playerAuthor').innerText = '@' + video.authorHandle;
-            if (video.verified) {
-                document.getElementById('playerAuthorVerified').classList.remove('hidden');
-            } else {
-                document.getElementById('playerAuthorVerified').classList.add('hidden');
-            }
-            document.getElementById('playerViews').innerText = `${video.views} views`;
-            document.getElementById('playerLikes').innerText = video.likes;
-
-            // Check permissions for deletion / moderation
-            const deleteBtn = document.getElementById('btnDeleteVideo');
-            const deleteBtnText = document.getElementById('deleteBtnText');
-            const isOwner = window.state.currentUser && window.state.currentUser.handle === OWNER_HANDLE;
-            const isCreator = window.state.currentUser && window.state.currentUser.handle === video.authorHandle;
-
-            if (isOwner || isCreator) {
-                deleteBtn.classList.remove('hidden');
-                deleteBtn.classList.add('flex');
-                if (isOwner && !isCreator) {
-                    deleteBtnText.innerText = "Moderate / Remove (Owner)";
-                } else {
-                    deleteBtnText.innerText = "Delete Video";
-                }
-            } else {
-                deleteBtn.classList.add('hidden');
-                deleteBtn.classList.remove('flex');
-            }
-
-            renderPlayerComments(video.comments);
-            document.getElementById('modalPlayer').classList.remove('hidden');
-        };
-
-        window.closePlayerModal = function() {
-            const player = document.getElementById('playerVideo');
-            player.pause();
-            player.src = '';
-            document.getElementById('modalPlayer').classList.add('hidden');
-        };
-
-        window.actionDeleteVideo = async function() {
-            if (!window.state.currentUser) return;
-            const video = window.state.videos.find(v => v.id === window.state.activeVideoId);
-            if (!video) return;
-
-            const isOwner = window.state.currentUser.handle === OWNER_HANDLE;
-            const isCreator = window.state.currentUser.handle === video.authorHandle;
-
-            if (!isOwner && !isCreator) {
-                showToast("Permission denied.");
-                return;
-            }
-
-            try {
-                await deleteVideoFromDB(video.id);
-                window.state.videos = window.state.videos.filter(v => v.id !== video.id);
-                closePlayerModal();
-                renderFeed();
-                showToast(isOwner && !isCreator ? "Video removed by platform owner (@vortexengine)." : "Video deleted successfully.");
-            } catch (err) {
-                console.error("Delete error:", err);
-                showToast("Failed to delete video.");
-            }
-        };
-
-        function renderPlayerComments(comments) {
-            const container = document.getElementById('playerCommentsContainer');
-            container.innerHTML = comments.length === 0 ? '<p class="text-xs text-slate-500 italic">No comments yet.</p>' : '';
-
-            comments.forEach(c => {
-                const item = document.createElement('div');
-                item.className = "p-2 rounded-xl bg-slate-900 border border-slate-800 text-xs space-y-0.5";
-                item.innerHTML = `
-                    <div class="flex items-center gap-1 font-bold text-vortex-cyan">
-                        <span>@${c.handle}</span>
-                        ${c.verified ? '<span class="text-sky-400 text-[10px]"><i class="fa-solid fa-circle-check"></i></span>' : ''}
-                    </div>
-                    <div class="text-slate-300">${c.text}</div>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        function aiAntiSpamCheck(text) {
-            const spamKeywords = ['free money', 'subscribe to my channel', 'click here', 'crypto giveaway', 'win cash', 'hack'];
-            const lower = text.toLowerCase();
-            for (let kw of spamKeywords) {
-                if (lower.includes(kw)) return false;
-            }
-            if (text.length > 300 || (text === text.toUpperCase() && text.length > 15)) return false;
-            return true;
-        }
-
-        window.submitComment = function() {
-            if (!window.state.currentUser) {
-                showToast("Please sign in to post comments.");
-                openAuthModal();
-                return;
-            }
-
-            const input = document.getElementById('inputComment');
-            const val = input.value.trim();
-            if (!val) return;
-
-            if (!aiAntiSpamCheck(val)) {
-                showToast("AI Anti-Spam Guard blocked this comment as potential spam.");
-                return;
-            }
-
-            const video = window.state.videos.find(v => v.id === window.state.activeVideoId);
-            if (video) {
-                video.comments.push({
-                    handle: window.state.currentUser.handle,
-                    verified: window.state.currentUser.verified,
-                    text: val
-                });
-                updateVideoMetaInDB(video);
-                renderPlayerComments(video.comments);
-                input.value = '';
-                showToast("Comment posted successfully");
-            }
-        };
-
-        window.actionLike = function() {
-            const video = window.state.videos.find(v => v.id === window.state.activeVideoId);
-            if (video) {
-                video.likes++;
-                updateVideoMetaInDB(video);
-                document.getElementById('playerLikes').innerText = video.likes;
-                showToast("Liked!");
-            }
-        };
-
-        window.actionLikeShort = function(id, btn) {
-            const video = window.state.videos.find(v => v.id === id);
-            if (video) {
-                video.likes++;
-                updateVideoMetaInDB(video);
-                btn.querySelector('span').innerText = video.likes;
-                showToast("Liked!");
-            }
-        };
-
-        window.actionFollow = function() {
-            document.getElementById('playerFollowText').innerText = 'Following';
-            showToast("Creator followed!");
-        };
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastText').innerText = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 3000);
-        }
-    </script>
 </body>
 </html>
